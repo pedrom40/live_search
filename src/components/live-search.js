@@ -6,31 +6,22 @@ import CharacterList from './character-list';
 export default class LiveSearch extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
-      characters: this.props.characters
+      searchTerm: ''
     }
-  };
-
-  setSearchTerm(term) {
-
-    let characters = [];
-
-    this.props.characters.map( character => {
-      if (character.name.search(term) !== -1) {
-        return characters.push(character);
-      }
-    });
-
-    this.setState({
-      characters: characters
-    })
-  };
+  }
 
   render() {
-    return  <div className="live-search">
-              <SearchForm onChange={value => this.setSearchTerm(value)}/>
-              <CharacterList characters={this.state.characters}/>
-            </div>
-  };
+    const characters = this.props.characters.filter(character =>
+      character.name.toLowerCase().includes(
+        this.state.searchTerm.toLowerCase()
+      )
+    );
+    return (
+      <div className="live-search">
+        <SearchForm onChange={searchTerm => this.setState({searchTerm})} />
+        <CharacterList characters={characters} />
+      </div>
+    );
+  }
 }
