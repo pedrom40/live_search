@@ -6,8 +6,8 @@ import CharacterList from './character-list';
 export default function LiveSearch(props) {
   return (
     <div className="live-search">
-    <SearchForm />
-    <CharacterList characters={props.characters} />
-  </div>
-);
+      <SearchForm />
+      <CharacterList characters={props.characters} />
+    </div>
+  );
 }
